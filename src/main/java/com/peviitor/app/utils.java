@@ -12,6 +12,35 @@ import java.util.stream.Collectors;
 import org.json.JSONObject;
 
 public class utils {
+
+    public static String get(String urlString, JSONObject... header) throws Exception {
+        URL url = new URL(urlString);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        for (JSONObject h : header) {
+            for (String key : h.keySet()) {
+                con.setRequestProperty(key, h.getString(key));
+            }
+        }
+
+        con.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+
+        String inputLine;
+        StringBuffer content = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            content.append(inputLine);
+        }
+
+        in.close();
+        con.disconnect();
+
+        return content.toString();
+    }
+    
     public static String post(String urlString, String data, JSONObject... header) throws Exception {
         URL url = new URL(urlString);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -52,6 +81,6 @@ public class utils {
         in.close();
         con.disconnect();
 
-        return null;
+        return content.toString();
     }
 }
