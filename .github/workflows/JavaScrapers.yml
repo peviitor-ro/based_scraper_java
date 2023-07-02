@@ -26,9 +26,10 @@ jobs:
         server-id: server-id
         settings-path: ${{ github.workspace }}
         maven-version: '3.8.3'
-        
-    - name : Step 3 - compile
-      run: mvn package
+
+    - name: Step 3 - run 
+      run: mvn compile exec:java -Dexec.mainClass=com.peviitor.app.main
+
 
       
       

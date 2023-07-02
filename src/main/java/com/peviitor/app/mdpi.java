@@ -45,14 +45,17 @@ public class mdpi {
         System.out.println(JSONObject.valueToString(jobs));
 
         try {
+            String apikey = System.getenv("APIKEY");
             // // Clean Data from API
             utils.post("https://api.peviitor.ro/v4/clean/", JSONObject.valueToString(company), new JSONObject[] {
-                new JSONObject().put("Content-Type", "application/x-www-form-urlencoded").put("apikey", "182b157-bb68-e3c5-5146-5f27dcd7a4c8")
+                new JSONObject().put("Content-Type", "application/x-www-form-urlencoded")
+                .put("apikey", apikey)
             });
 
             // // Add Data to API
             utils.post("https://api.peviitor.ro/v4/update/", JSONObject.valueToString(jobs), new JSONObject[] {
-                new JSONObject().put("Content-Type", "application/json").put("apikey", "182b157-bb68-e3c5-5146-5f27dcd7a4c8")
+                new JSONObject().put("Content-Type", "application/json")
+                .put("apikey", apikey)
             });
 
             // Add logo
