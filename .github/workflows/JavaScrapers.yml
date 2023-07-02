@@ -28,6 +28,8 @@ jobs:
         maven-version: '3.8.3'
 
     - name: Step 3 - run 
+      env:
+        APIKEY: ${{ secrets.APIKEY }}
       run: mvn compile exec:java -Dexec.mainClass=com.peviitor.app.main
 
 
