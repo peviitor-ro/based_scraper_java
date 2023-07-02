@@ -52,9 +52,7 @@ public class cgi {
                 job.put("city", city);
 
                 jobs.add(job);
-            }
-
-            
+            } 
         }
         System.out.println(JSONObject.valueToString(jobs));
 
