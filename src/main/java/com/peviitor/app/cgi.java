@@ -60,14 +60,14 @@ public class cgi {
             String apikey = System.getenv("APIKEY");
             // // Clean Data from API
             utils.post("https://api.peviitor.ro/v4/clean/", JSONObject.valueToString(company), new JSONObject[] {
-                    new JSONObject().put("Content-Type", "application/x-www-form-urlencoded").put("apikey",
-                            apikey)
+                    new JSONObject().put("Content-Type", "application/x-www-form-urlencoded")
+                    .put("apikey", apikey)
             });
 
             // // Add Data to API
             utils.post("https://api.peviitor.ro/v4/update/", JSONObject.valueToString(jobs), new JSONObject[] {
-                    new JSONObject().put("Content-Type", "application/json").put("apikey",
-                            apikey)
+                    new JSONObject().put("Content-Type", "application/json")
+                    .put("apikey", apikey)
             });
 
             // Add logo
