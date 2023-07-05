@@ -1,20 +1,21 @@
 package com.peviitor.app;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class tpa {
-    public static JSONObject company = new JSONObject().put("company", "tpa");
+import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class frequentis {
+    public static JSONObject company = new JSONObject().put("company", "Frequentis");
     public static String country = "Romania";
     public static void main(String[] args) {
         Document document = Jsoup.parse("");
         try {
-            document = Jsoup.connect("https://www.tpa-group.ro/en/job-openings-keep-in-touch/").get();
+            document = Jsoup.connect("https://jobs.frequentis.com/careers/SearchJobs/?1302=%5B858865%5D&1302_format=775&listFilterMode=1").get();
         }
         catch (Exception e) {
             System.out.println(e);
@@ -22,17 +23,20 @@ public class tpa {
 
         ArrayList<JSONObject> jobs = new ArrayList<JSONObject>();
         
-        Elements jobElements = document.getElementsByClass("entry-content clearfix").first().getElementsByTag("li");
+        Elements jobElements = document.getElementsByClass("list--jobs").first().getElementsByClass("list__item__text");
         for (Element element : jobElements) {
             JSONObject job = new JSONObject();
 
             job.put("id", UUID.randomUUID().toString());
-            job.put("job_title", element.getElementsByTag("a").text());
+            job.put("job_title", element.getElementsByClass("list__item__text__title").text());
             job.put("job_link", element.getElementsByTag("a")
+                                            .first()
                                             .attr("href"));
             job.put("company", company.getString("company"));
+            job.put("city", element.getElementsByClass("list__item__text__subtitle")
+                                            .text()
+                                            .split(" ")[2]);
             job.put("country", country);
-            job.put("city", "Romania");
 
             jobs.add(job);
         }
@@ -54,7 +58,7 @@ public class tpa {
             });
 
             // Add logo
-            String logo = "https://www.tpa-group.ro/wp-content/uploads/sites/6/2017/12/TPA-Tax-Audit-CEE-Logo.png";
+            String logo = "https://www.frequentis.com/themes/custom/frequentis/images/social/fb_default.jpg";
             ArrayList<JSONObject> logoData = new ArrayList<JSONObject>();
             logoData.add(new JSONObject().put("id", company.getString("company")).put("logo", logo));
 

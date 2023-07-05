@@ -8,8 +8,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>based_scraper_java</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>http://www.peviitor.ro</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
