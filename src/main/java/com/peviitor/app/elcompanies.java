@@ -46,8 +46,11 @@ public class elcompanies {
             job.put("job_link", obj.getJSONObject("meta_data").getString("canonical_url"));
             job.put("company", company.getString("company"));
             job.put("country", country);
-            job.put("city", obj.getString("city"));
-
+            try {
+                job.put("city", obj.getString("city"));
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             jobs.add(job);
         }
 
