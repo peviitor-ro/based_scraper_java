@@ -30,6 +30,7 @@ jobs:
     - name: Step 3 - run 
       env:
         APIKEY: ${{ secrets.APIKEY }}
+        MADAIR: ${{ secrets.MADAIR }}
       run: mvn compile exec:java -Dexec.mainClass=com.peviitor.app.main
 
 
